@@ -1,0 +1,127 @@
+%\documentclass[first,firstsupp,handout,compress,notes,navigation]{ETHclass} 
+%\documentclass[first,firstsupp,handout,notes]{ETHclass} 
+\documentclass[first,firstsupp]{ETHclass} % handout
+%\documentclass{ETHclass} 
+%\documentclass[first,firstsupp,notes]{ETHclass} 
+%\documentclass[first,firstsupp]{ETHclass}
+% 
+% Options for beamer:
+%
+% 9,10,11,12,13,14,17pt  Fontsizes
+% 
+% compress: navigation bar becomes smaller
+% t       : place contents of frames on top (alternative: b,c)
+% handout : handoutversion
+% notes   : show notes
+% notes=onlyslideswithnotes
+%
+%hyperref={bookmarksopen,bookmarksnumbered} : Needed for menues in
+%                                             acrobat. Also need
+%                                             pdftex as option or 
+%                                             compile with
+% pdflatex '\PassOptionsToPackage{pdftex,bookmarksopen,bookmarksnumbered}{hyperref} \input{file}'
+% 
+\usepackage{etex}
+\usepackage{beamerseminar}
+\usepackage{lmodern}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{wasysym}
+\usetikzlibrary{arrows,shapes}
+
+\tikzset{
+    state/.style={
+        rectangle,
+        rounded corners,
+        draw=black, very thick,
+        minimum height=2em,
+        inner sep=2pt,
+        text centered,
+    },
+                                                                                     }
+
+
+% \usepackage{amssymb}
+% \usepackage{enumitem} % Strange
+%\usepackage[accumulated]{beamerseminar}
+                                % remove ``accumulated'' option
+                                % for original behaviour
+% \usepackage{beamerbasenotes}
+% \usepackage{ragged2e} 
+\usepackage{amsmath}
+\usepackage{caption}
+\captionsetup[figure]{labelformat=empty}
+\captionsetup[table]{labelformat=empty}
+
+%\setbeamertemplate{note page}[plain] 
+%\setbeameroption{notes on second screen}
+% 
+% \usepackage[pdf]{pstricks}
+% 
+% %\setbeamertemplate{note page}[plain] 
+% \setbeamertemplate{note page}{\ \\[.3cm]
+% \textbf{\color{blue}Notes:}\\%[0.1cm]
+% {\footnotesize %\tiny
+% \insertnote}}
+% %\setbeameroption{notes on second screen}
+% 
+% \usepackage{multimedia}
+% 
+\setbeamertemplate{navigation symbols}{} % suppresses all navigation symbols:
+% \setbeamertemplate{navigation symbols}[horizontal] % Organizes the navigation symbols horizontally.
+% \setbeamertemplate{navigation symbols}[vertical] % Organizes the navigation symbols vertically.
+% \setbeamertemplate{navigation symbols}[only frame symbol] % Shows only the navigational symbol for navigating frames.
+% 
+\setparametertextfont{\scriptsize}
+\setlabelfont{\scriptsize}
+\setlength{\stockheight}{\paperheight}
+% 
+\title{Primal estimated sub-gradient solver for SVM}
+\author{\small Lei Zhong}
+\institute{\small Advanced Topics in Machine Learning} 
+\date{\small \textbf{Nov. 4, 2014}} 
+% 
+\let\Tiny=\tiny
+\setbeamertemplate{itemize item}{\textbullet} 
+\setbeamertemplate{itemize subitem}{$\rightarrow$} % \lozenge \heartsuit \diamondsuit \bigstar \clubsuit \spadesuit \square \Box \small $\bigstar$
+\setbeamertemplate{sections/subsections in toc}[ball]
+\setbeamertemplate{items}[ball]
+%
+\newcommand{\titleslide}{{%{{\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{images/titleslide}}
+\begin{frame}
+ 	% \frametitle{$ $} % 
+ 	\frametitle{Outline}
+	\tableofcontents[currentsection, currentsubsection]
+\end{frame}}}
+%
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+%
+\lstset{
+	language=Java, %[Sharp]C, 				% c-sharp programming language
+	numbers=left,					% where to put the line-numbers
+	numberstyle=\tiny\color{gray},	% the style that is used for the line-numbers
+	keywordstyle=\color{blue}\bfseries,	% keyword style
+	keywordstyle=\color{blue},		% keyword style
+	commentstyle=\color{dkgreen},	% comment style
+	stringstyle=\color{mauve},		% string literal style
+	stepnumber=1,					% the step between two line-numbers. If it's 1, each line 
+									% will be numbered
+	numbersep=5pt,					% how far the line-numbers are from the code
+	tabsize=4,						% sets default tabsize to 2 spaces
+	basicstyle=\small				% the size of the fonts that are used for the code	
+}
+
+\title{Primal estimated sub-gradient solver for SVM}
+
+\begin{document}
+
+%\include{content}
+\include{recap}
+\include{analysis}
+\include{experiment}
+\include{reference}
+
+\end{document}
