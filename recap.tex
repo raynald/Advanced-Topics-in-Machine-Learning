@@ -20,7 +20,7 @@
         \{(\xv_i,y_i)\in R^d \times \{+1, -1\}: i\in S \overset{def}{=} \{1,2,\ldots,n\}\}
     \]
     \begin{itemize}
-        \item[$\rhd$] Example: $\xv_1,\ldots,\xv_n$ (assumption: $\max_i\|\xv_i\|_2\le 1$)
+        \item[$\rhd$] Example: $\xv_1,\ldots,\xv_n$ (assumption: $\max_i\|\xv_i\|_2\le R$)
         \item[$\rhd$] Labels: $y_i \in\{+1,-1\}$
     \end{itemize}
     {\color{red} Optimization formulation of SVM:}
@@ -38,7 +38,7 @@
         \begin{itemize}
             \item Loss: $L_i := \ell(\langle \xv_i, \wv \rangle, y_i)$
 
-            \item Subgradient: $l'(\langle \xv_i, \wv \rangle, y_i)$
+            \item Subgradient: $l'(\langle \xv_i, \wv \rangle, y_i)$ with $\|l'\| \le X$
         \end{itemize}
     \end{block}
     Use the notation $z=\langle \wv, \xv_i\rangle$, sample loss functions:
@@ -46,9 +46,19 @@
         \begin{tabular}{|l|l|}
             \hline
             Loss function & Subgradient  \\ \hline
-            $l(z,y_i) = \max\{0,1-y_i z\}$ & ss \\ \hline%$\left\{\begin{matrix} -y_ix_i& if y_iz<1 \\ 0 & otherwise \end{matrix}\right$ \\ \hline
-            $l(z,y_i) = \log(1+e^{-y_iz})$ & 1\\ \hline
-            $l(z,y_i) = \max\{0, | y_i - z| - \epsilon\}$ & 1 \\ \hline
+            $l(z,y_i) = \max\{0,1-y_i z\}$ & $l' = \left\{
+            \begin{matrix} -y_i x_i & \text{if } y_i z<1 \\ 
+            0 & \text{otherwise}
+            \end{matrix}
+        \right\}$ \\ \hline
+        $l(z,y_i) = \log(1+e^{-y_iz})$ & $l' = -\frac{y_i}{1+e^{y_i z}}\xv_i$\\ \hline
+        $l(z,y_i) = \max\{0, | y_i - z| - \epsilon\}$ & $l'=\left\{ 
+        \begin{matrix}
+            \xv_i & \text{if } z-y_i > \epsilon \\
+            -\xv_i & \text{if } y_i-z > \epsilon \\
+            \bm{0} & \text{otherwise}
+        \end{matrix}
+        \right\}$ \\ \hline
         \end{tabular}
     \end{table}
 \end{frame}

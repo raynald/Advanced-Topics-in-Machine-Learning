@@ -1,4 +1,4 @@
-\begin{frame}{Prevous Work}
+\begin{frame}{Previous Work}
     \begin{itemize}
         \item Dual-based methods
             \begin{itemize}
@@ -37,9 +37,9 @@
 
     For $\overline{\wv} = \frac1T \sum_{t=1}^T \wv_t $, we have:
     \[
-        \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c\log(T)}\times \frac{1}{\lambda T}
+        \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c} \times \frac{1+\ln(T)}{2\lambda T}
     \]
-    where $c=(\sqrt(\lambda)+1)^2$.
+    where $c=4R^2$.
 \end{frame}
 
 \begin{frame}{Basic Pegasos Algorithm (SGD)}
@@ -59,11 +59,12 @@
 
     For $\overline{\wv} = \frac1T \sum_{t=1}^T \wv_t $, we have:
     \[
-        \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c\log(T)}\times \frac{1}{\lambda T}
+         \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c} \times \frac{1+\ln(T)}{2\lambda T}
     \]
-    where $c=(\sqrt(\lambda)+1)^2$.
+    where $c=4R^2$.
 \end{frame}
 
+\begin{comment}
 \begin{frame}{Run-Time of Pegasos}
     \begin{itemize}
         \item Choosing $|A_t|=1$% and a linear kernel over $\R^n$
@@ -93,11 +94,23 @@
             iterations.
     \end{itemize}
 \end{frame}
+\end{comment}
 
 \section{Analysis - faster convergence rates}
-\begin{frame}{Proof Sketch}
-    \begin{itemize}
-        \item Logarithmic Regret for OCP (Hazan et al 06)
+\begin{frame}{Analysis from Lacoste}
+    \begin{itemize} 
+        \item Classical analysis: $\eta_t=\frac{1}{\lambda t}$
+            \begin{itemize}
+                \item $\E f\!\left(\frac1T\sum_{t=1}^T \wv^{(t)} \right)- f(\wv^*) \le \frac{2X^2R^2}{\lambda T}(\ln{T}+1)$
+                \item For Hinge loss $X = 1$, the result is same as before.
+            \end{itemize}
+        \item New analysis: $\eta_t=\frac{2}{\lambda (t+1)}$
+            \begin{itemize}
+                \item $\E f(\frac{2}{T(T+1)}\sum_{t=1}^{T}t w^{(t)}) - f(w^*) \le \frac{8X^2 R^2}{\lambda (T+1)}$
+                \item $\E_{i(T)} \left[  \|\wv^{(T+1)} - \wv^*\|^2  \|  \wv^t  \right]  \le \frac{16X^2 R^2}{\lambda^2 (T+1)}$
+                \item In this case, $\overline{w}^{(T)}\doteq \frac{2}{T(T+1)}\sum_{t=1}^T t\wv^{(t)}$
+            \end{itemize}
     \end{itemize}
+    
 \end{frame}
 
