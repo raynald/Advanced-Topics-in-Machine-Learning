@@ -1,5 +1,21 @@
 \begin{frame}{Basic Pegasos Algorithm}
-    sflj
+    Algorithm
+    \begin{enumerate} 
+        \item Choose $\wv_1 = 0 \in \R^d$
+        \item Iterate for $t = 1,2,$\ldots$,T$
+        \begin{enumerate}
+            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=b}$, uniformly at random
+            \item Set stepsize $\eta_t \leftarrow \frac{1}{\lambda t}$
+            \item Update $w^{(t+1)} \leftarrow w^{(t)} - \eta$
+        \end{enumerate}
+    \end{enumerate}
+
+    Theorem
+    For $\overline{\wv} = \frac1T \sum_{t=1}^T \wv_t $, we have:
+    \[
+        \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c\log(T)}\times \frac{1}{\lambda T}
+    \]
+    where $c=(\sqrt(\lambda)+1)^2$.
 \end{frame}
 \section{Convergence analysis}
 \subsection{Classical analysis}
