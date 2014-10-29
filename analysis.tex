@@ -1,24 +1,103 @@
-\begin{frame}{Basic Pegasos Algorithm}
-    Algorithm
+\begin{frame}{Prevous Work}
+    \begin{itemize}
+        \item Dual-based methods
+            \begin{itemize}
+                \item Interior Point
+                    \begin{itemize}
+                        \item Memory: $m^2$, time: $m^3 log(log(1/\epsilon))$
+                    \end{itemize}
+                \item Decomposition
+                    \begin{itemize}
+                        \item Memory: $m$, time: super-linear in $m$
+                    \end{itemize}
+            \end{itemize}
+        \item Online learning $\&$ Stochastic Gradient
+            \begin{itemize}
+                \item Memory: $O(1)$, time: $1/\epsilon^2$ (linear kernel)
+            \end{itemize}
+    \end{itemize}
+    \fcolorbox{yellow}{yellow}{Better rates for finite dimensional instances (Murata, Bottou)} 
+    Typically, online learning algorithms do not converge to the optimal solution of SVM
+\end{frame}
+
+\begin{frame}{Basic Pegasos Algorithm (SGD)}
+    {\color{blue} Algorithm}
+
     \begin{enumerate} 
         \item Choose $\wv_1 = 0 \in \R^d$
         \item Iterate for $t = 1,2,$\ldots$,T$
         \begin{enumerate}
             \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=b}$, uniformly at random
             \item Set stepsize $\eta_t \leftarrow \frac{1}{\lambda t}$
-            \item Update $w^{(t+1)} \leftarrow w^{(t)} - \eta$
+            \item Update $w^{(t+1)} \leftarrow w^{(t)} - \eta_t \partial f_{{\color{red}A_t}}(\wv^{ (t)})$
         \end{enumerate}
     \end{enumerate}
 
-    Theorem
+    {\color{blue} Theorem}
+
     For $\overline{\wv} = \frac1T \sum_{t=1}^T \wv_t $, we have:
     \[
         \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c\log(T)}\times \frac{1}{\lambda T}
     \]
     where $c=(\sqrt(\lambda)+1)^2$.
 \end{frame}
-\section{Convergence analysis}
-\subsection{Classical analysis}
 
-\subsection{New analysis}
+\begin{frame}{Basic Pegasos Algorithm (SGD)}
+    {\color{blue} Algorithm}
+
+    \begin{enumerate} 
+        \item Choose $\wv_1 = 0 \in \R^d$
+        \item Iterate for $t = 1,2,$\ldots$,T$
+        \begin{enumerate}
+            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=b}$, uniformly at random
+            \item Set stepsize $\eta_t \leftarrow \frac{1}{\lambda t}$
+            \item Update $w^{(t+1)} \leftarrow (1-\eta\lambda)w^{(t)} + \frac{\eta_t}{\color{red}b} \sum_{i\in {\color{red} A_t}} l' \xv_i$
+        \end{enumerate}
+    \end{enumerate}
+
+    {\color{blue} Theorem}
+
+    For $\overline{\wv} = \frac1T \sum_{t=1}^T \wv_t $, we have:
+    \[
+        \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c\log(T)}\times \frac{1}{\lambda T}
+    \]
+    where $c=(\sqrt(\lambda)+1)^2$.
+\end{frame}
+
+\begin{frame}{Run-Time of Pegasos}
+    \begin{itemize}
+        \item Choosing $|A_t|=1$% and a linear kernel over $\R^n$
+            \begin{itemize}
+                \item[$\rightarrow$] Run-time required for Pegasos to find $\epsilon$ accurate solution w.p. , $1-\delta$
+            \[
+                \tilde{O}(\frac{n}{\delta \lambda \epsilon})
+            \]
+            \end{itemize}
+        \item Run-time does not depends on \#examples
+        \item Depends on ``difficulty'' of problem ($\lambda$ and $\epsilon$)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Formal Properties}
+    \begin{itemize}
+        \item Definition: $\wv$ is $\epsilon$ accurate if $f(\wv)-f(\wv^*)\le \epsilon$
+        \item Theorem 1: Pegasos finds $\epsilon$ accurate solution w.p., $1-\delta$ after at most
+            \[
+                \tilde{O}(\frac{1}{\delta \lambda \epsilon})
+            \]
+            iterations.
+        \item Theorem 2: Pegasos finds $\log(1/\delta)$ solutions $\st$ w.p., at least one of them is $\epsilon$ accurate after 
+            \[
+                \tilde{O}(\frac{\log(1/\delta)}{\lambda \epsilon})
+            \]
+            iterations.
+    \end{itemize}
+\end{frame}
+
+\section{Analysis - faster convergence rates}
+\begin{frame}{Proof Sketch}
+    \begin{itemize}
+        \item Logarithmic Regret for OCP (Hazan et al 06)
+    \end{itemize}
+\end{frame}
 
