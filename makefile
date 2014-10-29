@@ -1,5 +1,6 @@
 filename = main
-pdf: ${filename}.pdf
+all: pdf
+pdf: ${filename}.tex 
 	pdflatex ${filename}.tex
 	pdflatex ${filename}.tex
 

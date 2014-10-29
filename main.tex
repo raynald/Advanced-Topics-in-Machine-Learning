@@ -28,6 +28,7 @@
 \usepackage{tikz}
 \usepackage{verbatim}
 \usepackage{wasysym}
+\usepackage{bm}
 \usetikzlibrary{arrows,shapes}
 
 \tikzset{
@@ -54,6 +55,12 @@
 \captionsetup[figure]{labelformat=empty}
 \captionsetup[table]{labelformat=empty}
 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\wv}{\bm{w}}
+\newcommand{\xv}{\bm{x}}
+\DeclareMathOperator{\st}{\textrm{s.t.}}
+
+
 %\setbeamertemplate{note page}[plain] 
 %\setbeameroption{notes on second screen}
 % 
@@ -79,8 +86,8 @@
 % 
 \title{Primal estimated sub-gradient solver for SVM}
 \author{\small Lei Zhong}
-\institute{\small Advanced Topics in Machine Learning} 
-\date{\small \textbf{Nov. 4, 2014}} 
+\institute{\small Advanced Topics in Machine Learning}
+\date{\tiny \textbf{Nov. 4, 2014}} 
 % 
 \let\Tiny=\tiny
 \setbeamertemplate{itemize item}{\textbullet} 
@@ -118,8 +125,8 @@
 
 \begin{document}
 
+\include{content}
 \include{recap}
-%\include{content}
 \include{analysis}
 \include{experiment}
 \include{reference}
