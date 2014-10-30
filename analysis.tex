@@ -64,37 +64,38 @@
     where $c=4R^2$.
 \end{frame}
 
-\begin{comment}
 \begin{frame}{Run-Time of Pegasos}
     \begin{itemize}
         \item Choosing $|A_t|=1$% and a linear kernel over $\R^n$
             \begin{itemize}
-                \item[$\rightarrow$] Run-time required for Pegasos to find $\epsilon$ accurate solution w.p. , $1-\delta$
+                \item[$\rightarrow$] Run-time required for Pegasos to find $\epsilon$ accurate solution %w.p. , $1-\delta$
             \[
-                \tilde{O}(\frac{n}{\delta \lambda \epsilon})
+                \tilde{O}(\frac{1}{\epsilon})
             \]
+            %\[
+            %    \tilde{O}(\frac{n}{\delta \lambda \epsilon})
+            %\]
             \end{itemize}
-        \item Run-time does not depends on \#examples
-        \item Depends on ``difficulty'' of problem ($\lambda$ and $\epsilon$)
+        \item Run-time does not depends on \#examples, suited for learning form large datasets
+        \item Previous, depends on ``difficulty'' of problem (both $\lambda$ and $\epsilon$)
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Formal Properties}
-    \begin{itemize}
-        \item Definition: $\wv$ is $\epsilon$ accurate if $f(\wv)-f(\wv^*)\le \epsilon$
-        \item Theorem 1: Pegasos finds $\epsilon$ accurate solution w.p., $1-\delta$ after at most
-            \[
-                \tilde{O}(\frac{1}{\delta \lambda \epsilon})
-            \]
-            iterations.
-        \item Theorem 2: Pegasos finds $\log(1/\delta)$ solutions $\st$ w.p., at least one of them is $\epsilon$ accurate after 
-            \[
-                \tilde{O}(\frac{\log(1/\delta)}{\lambda \epsilon})
-            \]
-            iterations.
-    \end{itemize}
-\end{frame}
-\end{comment}
+%\begin{frame}{Formal Properties}
+%    \begin{itemize}
+%        \item Definition: $\wv$ is $\epsilon$ accurate if $f(\wv)-f(\wv^*)\le \epsilon$
+        %\item Theorem 1: Pegasos finds $\epsilon$ accurate solution w.p., $1-\delta$ after at most
+        %    \[
+        %        \tilde{O}(\frac{1}{\delta \lambda \epsilon})
+        %    \]
+        %    iterations.
+        %\item Theorem 2: Pegasos finds $\log(1/\delta)$ solutions $\st$ w.p., at least one of them is $\epsilon$ accurate after 
+        %    \[
+        %        \tilde{O}(\frac{\log(1/\delta)}{\lambda \epsilon})
+        %    \]
+        %    iterations.
+%    \end{itemize}
+%\end{frame}
 
 \section{Analysis - faster convergence rates}
 \begin{frame}{Analysis from Lacoste}

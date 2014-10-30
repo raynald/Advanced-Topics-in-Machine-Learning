@@ -4,79 +4,94 @@
         \item 3 datasets (provided by Joachims) 
             \begin{itemize}
                 \item Reuters CCAT (800K examples, 47k features)
-                \item Physics ArXiv (62k examples, 100k features)
                 \item Covertype (581k examples, 54 features)
+                \item Physics ArXiv (62k examples, 100k features)
             \end{itemize}
         \item 4 competing algorithms
             \begin{itemize}
-                \item SVM-light (Joachims)
                 \item SVM-Perf (Joachims'06)
+                \item SVM-light (Joachims)
                 \item Norma (Kivinen, Smola, Williamson '02)
                 \item Zhang'04 (stochastic gradient descent)
             \end{itemize}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Training Time(in seconds)}
-\begin{table}[h]
-    \begin{tabular}{|l|l|l|l|}
+\begin{frame}{Linear kernels}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{l|l|l|l|l|l}
             \hline
-             & Pegasos & SVM-Perf & SVM-Light \\ \hline
-            Reuters & \textbf{2} & 77 & 20,075 \\ \hline
-            Covertype & \textbf{6} & 85 & 25,514 \\ \hline
-            Astro-Physics & \textbf{2} & 5 & 80 \\ \hline
+            Dataset & Training & Testing & Features & Sparsity(\%) & $\lambda$ \\ \hline 
+            astro-ph & 29,882 & 32,487 & 99,757 & 0.08 & $5\times 10^{-5}$ \\ 
+            CCAT & 781,265 & 23,149 & 47,236 & 0.16 & $10^{-4}$ \\ 
+            cov1 & 522,911 & 58,101 & 54 & 22.22 & $10^{-6}$ \\ \hline
         \end{tabular}
     \end{table}
 \end{frame}
 
-\begin{frame}{Compare to Norma (on Physics)}
+\begin{frame}{Linear kernels}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lllll}
+            \hline
+            Dataset & Pegasos & SDCA & SVM-Perf & LASVM \\ \hline 
+            astro-ph & 0.04s(3.56\%) & 0.03s(3.49\%) & 0.1s(3.39\%) & 54s(3.65\%) \\ 
+            CCAT & 0.16s(6.16\%) & 0.36s(6.57\%) & 3.6s(5.93\%) & $>$18000 s  \\ 
+            cov1 & 0.32s(23.2\%) & 0.20s(22.9\%) & 4.2s(23.9\%) & 210s(23.8\%) \\ \hline
+        \end{tabular}
+    \end{table}
 \end{frame}
 
-\begin{frame}{Compare to Zhang (on Physics)}
+\begin{frame}{Comparison of linear SVM optimizers}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[height=0.7\textheight, width=\textwidth]{images/comp1.png}
+    \end{figure}
 \end{frame}
 
-\begin{frame}{Effect of $k=|A_t|$ when $T$ is fixed}
+\begin{frame}{Effect of regularization parameter $\lambda$}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[height=0.7\textheight, width=0.7\textwidth]{images/comp_T.png}
+    \end{figure}
 \end{frame}
 
-\begin{frame}{Effect of $k=|A_t|$ when $kT$ is fixed}
+\begin{frame}{Experiments with the mini-batch variant}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[height=0.7\textheight, width=\textwidth]{images/comp_k.png}
+    \end{figure}
 \end{frame}
 
-\section{Extensions}
-\begin{frame}{I want my kernels!}
-\begin{itemize}
-    \item Pegasos can seamlessly be adapted to employ non-linear kernels while working solely on the primal objective function
-    \item No need to switch to the dual problem
-    \item Number of support vectors is bounded by 
-        \[
-            \tilde{O}(\frac{1}{\lambda \epsilon})
-        \]
-\end{itemize}
+\begin{frame}{Comparison of sampling procedures}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[height=0.7\textheight, width=0.7\textwidth]{images/epochs.png}
+    \end{figure}
 \end{frame}
 
-\begin{frame}{Complex Decision Problems}
-\begin{itemize}
-    \item Pegasos works whenever we know how to calculate subgradients of loss func. $l(\wv;(\xv,y))$
-    \item Example: Structured output prediction
-        \[
-            l(\wv;(\xv,y)) = \max_{y'}[\gamma(y,y')-\langle \wv, \phi(\xv,y)- \phi(\xv,y')\rangle]_+
-        \]
-    \item Subgradient is $\phi(\xv,y')-\phi(\xv,y)$ where $y'$ is the maximizer in the definition of $l$
-\end{itemize}
+\begin{frame}{Compare to Norma and Zhang (on Physics)}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[height=0.7\textheight, width=\textwidth]{images/comp_nzh.png}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{Bias term}
-    \begin{itemize}
+    \begin{enumerate}
         \item Popular approach: increase dimension of $x$
 
             {\color{green}Cons: ``pay'' for $b$ in the regularization term}
-        \item Calculate subgradients w.r.t $w$ and w.r.t $b$:
-
-            {\color{green}Cons: convergence rate is 1/$\epsilon^2$}
         \item Define: $L(\wv) = \min_b \sum_{(\xv,y)\in S} [1-y(\langle \wv, \xv\rangle - b)]_+$
+        \item Rewrite problem: $\min_{\wv} {\frac{\lambda}{2}\|\wv\|^2+g(\wv;S)}$ where $g(\wv;S)=\min_b \frac1m \sum_{(\xv,y)\in S} \left[1-y(\langle \wv, \xv\rangle + b)\right]_+$
+
+        Calculate subgradients w.r.t $w$ and w.r.t $b$.
+
         \item Search $b$ in an outer loop
 
-            {\color{green}Cons: evaluating objective is $1/\epsilon^2$}
-    \end{itemize}
+            {\color{green}Cons: evaluation time remain same as unbiased}
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}{Discussion}
