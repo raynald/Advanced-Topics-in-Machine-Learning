@@ -4,16 +4,16 @@
             \begin{itemize}
                 \item Interior Point
                     \begin{itemize}
-                        \item Memory: $m^2$, time: $m^3 log(log(1/\epsilon))$
+                        \item Memory: $n^2$, time: $n^3 \log(\log(1/\epsilon))$, run time per iteration $\log(\log(1/\epsilon))$
                     \end{itemize}
                 \item Decomposition
                     \begin{itemize}
-                        \item Memory: $m$, time: super-linear in $m$
+                        \item Memory: $n$, time: super-linear in $n$
                     \end{itemize}
             \end{itemize}
         \item Online learning $\&$ Stochastic Gradient
             \begin{itemize}
-                \item Memory: $O(1)$, time: $1/\epsilon^2$ (linear kernel)
+                \item Memory: $O(1)$, time: $1/\epsilon^2$ (linear kernel), run-time per iteration: O(d)
             \end{itemize}
     \end{itemize}
     \fcolorbox{yellow}{yellow}{Better rates for finite dimensional instances (Murata, Bottou)} 
@@ -27,7 +27,7 @@
         \item Choose $\wv_1 = 0 \in \R^d$
         \item Iterate for $t = 1,2,$\ldots$,T$
         \begin{enumerate}
-            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=b}$, uniformly at random
+            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=m}$, uniformly at random
             \item Set stepsize $\eta_t \leftarrow \frac{1}{\lambda t}$
             \item Update $w^{(t+1)} \leftarrow w^{(t)} - \eta_t \partial f_{{\color{red}A_t}}(\wv^{ (t)})$
         \end{enumerate}
@@ -37,7 +37,7 @@
 
     For $\overline{\wv} = \frac1T \sum_{t=1}^T \wv_t $, we have:
     \[
-        \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c} \times \frac{1+\ln(T)}{2\lambda T}
+        \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c} \cdot \frac{1+\ln(T)}{2\lambda T}
     \]
     where $c=4R^2$.
 \end{frame}
@@ -49,9 +49,9 @@
         \item Choose $\wv_1 = 0 \in \R^d$
         \item Iterate for $t = 1,2,$\ldots$,T$
         \begin{enumerate}
-            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=b}$, uniformly at random
+            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=m}$, uniformly at random
             \item Set stepsize $\eta_t \leftarrow \frac{1}{\lambda t}$
-            \item Update $w^{(t+1)} \leftarrow (1-\eta\lambda)w^{(t)} + \frac{\eta_t}{\color{red}b} \sum_{i\in {\color{red} A_t}} l' \xv_i$
+            \item Update $w^{(t+1)} \leftarrow (1-\eta\lambda)w^{(t)} + \frac{\eta_t}{\color{red}m} \sum_{i\in {\color{red} A_t}} l' \xv_i$
         \end{enumerate}
     \end{enumerate}
 
@@ -59,7 +59,7 @@
 
     For $\overline{\wv} = \frac1T \sum_{t=1}^T \wv_t $, we have:
     \[
-         \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c} \times \frac{1+\ln(T)}{2\lambda T}
+         \E[f(\overline{\wv})]\le f(w^*) + {\color{red} c} \cdot \frac{1+\ln(T)}{2\lambda T}
     \]
     where $c=4R^2$.
 \end{frame}
@@ -70,14 +70,14 @@
             \begin{itemize}
                 \item[$\rightarrow$] Run-time required for Pegasos to find $\epsilon$ accurate solution %w.p. , $1-\delta$
             \[
-                \tilde{O}(\frac{1}{\epsilon})
+                \tilde{O}(\frac{d}{\lambda \epsilon})
             \]
             %\[
             %    \tilde{O}(\frac{n}{\delta \lambda \epsilon})
             %\]
             \end{itemize}
         \item Run-time does not depends on \#examples, suited for learning form large datasets
-        \item Previous, depends on ``difficulty'' of problem (both $\lambda$ and $\epsilon$)
+        \item Depends on ``difficulty'' of problem (both $\lambda$ and $\epsilon$)
     \end{itemize}
 \end{frame}
 
@@ -98,17 +98,17 @@
 %\end{frame}
 
 \section{Analysis - faster convergence rates}
-\begin{frame}{Analysis from Lacoste}
+\begin{frame}{Analysis from Lacoste-Julien et.al.[2]}
     \begin{itemize} 
         \item Classical analysis: $\eta_t=\frac{1}{\lambda t}$
             \begin{itemize}
-                \item $\E f\!\left(\frac1T\sum_{t=1}^T \wv^{(t)} \right)- f(\wv^*) \le \frac{2X^2R^2}{\lambda T}(\ln{T}+1)$
+                \item $\E f\!\left(\frac1T\sum_{t=1}^T \wv^{(t)} \right)- f(\wv^*) \le \frac{2{\ML}^2 R^2}{\lambda T}(\ln{T}+1)$
                 \item For Hinge loss $X = 1$, the result is same as before.
             \end{itemize}
         \item New analysis: $\eta_t=\frac{2}{\lambda (t+1)}$
             \begin{itemize}
-                \item $\E f(\frac{2}{T(T+1)}\sum_{t=1}^{T}t w^{(t)}) - f(w^*) \le \frac{8X^2 R^2}{\lambda (T+1)}$
-                \item $\E_{i(T)} \left[  \|\wv^{(T+1)} - \wv^*\|^2  \|  \wv^t  \right]  \le \frac{16X^2 R^2}{\lambda^2 (T+1)}$
+                \item $\E f(\frac{2}{T(T+1)}\sum_{t=1}^{T}t w^{(t)}) - f(w^*) \le \frac{8{\ML}^2 R^2}{\lambda (T+1)}$
+                \item $\E_{i(T)} \left[  \|\wv^{(T+1)} - \wv^*\|^2  \|  \wv^t  \right]  \le \frac{16{\ML}^2 R^2}{\lambda^2 (T+1)}$
                 \item In this case, $\overline{w}^{(T)}\doteq \frac{2}{T(T+1)}\sum_{t=1}^T t\wv^{(t)}$
             \end{itemize}
     \end{itemize}

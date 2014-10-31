@@ -10,14 +10,15 @@
 \begin{frame}{Family Support Machine}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[height=0.7\textheight, width=0.7\textwidth]{images/family.png}
+        \includegraphics[height=0.6\textheight, width=0.7\textwidth]{images/family.png}
     \end{figure}
+    From Peter Richt\'arik's slides
 \end{frame}
 
 \begin{frame}{Support Vector Machine: Primal Problem}
     Data: 
     \[
-        \{(\xv_i,y_i)\in R^d \times \{+1, -1\}: i\in S \overset{def}{=} \{1,2,\ldots,n\}\}
+        \{(\xv_i,y_i)\in \R^d \times \{+1, -1\}: i\in S \overset{def}{=} \{1,2,\ldots,n\}\}
     \]
     \begin{itemize}
         \item[$\rhd$] Example: $\xv_1,\ldots,\xv_n$ (assumption: $\max_i\|\xv_i\|_2\le R$)
@@ -38,7 +39,7 @@
         \begin{itemize}
             \item Loss: $L_i := \ell(\langle \xv_i, \wv \rangle, y_i)$
 
-            \item Subgradient: $l'(\langle \xv_i, \wv \rangle, y_i)$ with $\|l'\| \le X$
+            \item Subgradient: $l'(\langle \xv_i, \wv \rangle, y_i)$ with $\|l'\| \le \mathbb{L}$
         \end{itemize}
     \end{block}
     Use the notation $z=\langle \wv, \xv_i\rangle$, sample loss functions:
@@ -62,5 +63,4 @@
         \end{tabular}
     \end{table}
 \end{frame}
-
 
