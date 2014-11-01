@@ -170,6 +170,16 @@ where $l'(y,u)$ denotes any subgradient with respect to the second variable.
     
 \end{frame}
 
-\begin{frame}{SDCA}
-    
+\begin{frame}{Stochastic Dual Coordinate Ascent}
+    \begin{itemize}
+        \item Dual problem
+            \[
+                max_\theta D(\theta) := \frac1n \sum_{i=1}^n -f_i^*(-\theta_i) - \lambda r^*(\frac{1}{\lambda n}\sum_{i=1}^n \theta_i).
+            \]
+        \item Relationship with primal variable: $\wv=\nabla r^*(\vv(\theta))$, $\vv(\theta)=\frac{1}{\lambda n} \sum_{i=1}^n \theta_i$
+        \item Traditional SDCA
+            \[
+                \theta_i^t = \theta_i^{t-1} + \Delta \theta_i^{t-1}
+            \]
+    \end{itemize}
 \end{frame}
