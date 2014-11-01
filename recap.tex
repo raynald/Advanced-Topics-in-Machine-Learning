@@ -39,7 +39,7 @@
         \begin{itemize}
             \item Loss: $L_i := \ell(\langle \xv_i, \wv \rangle, y_i)$
 
-            \item Subgradient: $l'(\langle \xv_i, \wv \rangle, y_i)$ with $\|l'\| \le \mathbb{L}$
+            \item Subgradient: $l'(\langle \xv_i, \wv \rangle, y_i)$ with the assumption of $\|l'\| \le \mathbb{L}$
         \end{itemize}
     \end{block}
     Use the notation $z=\langle \wv, \xv_i\rangle$, sample loss functions:
@@ -48,7 +48,7 @@
             \hline
             Loss function & Subgradient  \\ \hline
             $l(z,y_i) = \max\{0,1-y_i z\}$ & $l' = \left\{
-            \begin{matrix} -y_i x_i & \text{if } y_i z<1 \\ 
+            \begin{matrix} -y_i \xv_i & \text{if } y_i z<1 \\ 
             0 & \text{otherwise}
             \end{matrix}
         \right\}$ \\ \hline

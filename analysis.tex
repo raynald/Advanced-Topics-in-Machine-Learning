@@ -4,7 +4,7 @@
             \begin{itemize}
                 \item Interior Point
                     \begin{itemize}
-                        \item Memory: $n^2$, time: $n^3 \log(\log(1/\epsilon))$, run time per iteration $\log(\log(1/\epsilon))$
+                        \item Memory: $n^2$, time: $n^3 \log(\log(1/\epsilon))$, run time per iteration $n^3$
                     \end{itemize}
                 \item Decomposition
                     \begin{itemize}
@@ -98,6 +98,61 @@
 %\end{frame}
 
 \section{Analysis - faster convergence rates}
+\begin{frame}{How to achieve this?}
+$\|\wv^{(t+1)}-\wv^*\|^2 = \|\wv^{(t)} - \eta_t\chiv_i^{(t)} - \wv^*\|^2
+    = \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\|\chiv_i^{(t)}\|^2 - 2\eta_t\chiv_i^{(t)}(\wv^{(t)} - \wv^*    )$
+
+
+Taking the expectation on both sides 
+\[
+        \E[ \|\wv^{(t+1)}-\wv^*\|^2  \ |\  \wv^t ] 
+        = \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\E_{i^{(t)}}\|\chiv_i^{(t)}\|^2 
+\]
+\[
+    - 2\eta_t\chiv_i^{(t)}(\wv^{(t)} - \wv^*)
+\]
+\[
+    \le \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\E_{i^{(t)}}\|\chiv_i^{(t)}\|^2 - 2\eta_t[f(\wv^{(t)}) -      f(\wv^*) + \frac{\lambda}{2}\|\wv^{(t)}-\wv^*\|^2].
+\]
+Re-arranging and taking expectation again
+\[
+    \E f(\wv^{(t)})-f(\wv^*) \le \frac{\eta_t}{2}\E\|\chiv_i^{(t)}\|^2+\frac{1-\lambda     \eta_t}{2\eta_t} \E \|\wv^{(t)}-\wv^*\|^2 
+\]
+\[
+    - \frac{1}{2\eta_t}\E\left[  \|\wv^{(t+1)} - \wv^*\|^2  \ |\        \wv^t  \right] 
+\]
+\end{frame}
+
+\begin{frame}{Lemma}
+With the Lipschitz assumption on $l(y,u)$ that $\|l'(y,u)\| \le X$, and assuming that $\|\x_i\|\le     R$ $\forall i$ where $i$ is picked according to $p_i$, it holds that
+\[
+    \E_{i^{(t)}} \|\chiv_i^{(t)}\|\le 4\ML^2R^2
+\]
+where $l'(y,u)$ denotes any subgradient with respect to the second variable.
+
+\end{frame}
+
+\begin{frame}
+    \begin{block}{ Minkowski inequality}
+    \[
+        \sqrt{\E(X+Y)^2} \le \sqrt{\E X^2} + \sqrt{\E Y^2}
+    \]
+    \end{block}
+    \[
+        \sqrt{\E_{i^{(t)}} \|\chiv_i^{(t)}\|^2} \le \sqrt{\E_{i^{(t)}} \| l'\xv_i \|^2} + \lambda           \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)} \|^2} \le XR + 
+    \] 
+    \[
+        \lambda \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)}          \|^2}.
+    \]
+    \[
+        \sqrt{\E_{i(t)} \|\wv^{(t+1)}\|^2} \le (1-\lambda \eta_t) \sqrt{\E_{i(t)} \|\wv^{(t)}\|^2} +        \eta_t \sqrt{\E_{i(t)} \|l'\xv_i\|^2} 
+    \]
+    \[
+        \le (1-\lambda \eta_t)\sqrt{\E_{i(t)} \| \wv^{(t)}\|^2} +         \lambda \eta_t \frac{XR}{\lambda}.
+    \]
+    {\color{blue} Why we don't need projection?}
+\end{frame}
+
 \begin{frame}{Analysis from Lacoste-Julien et.al.[2]}
     \begin{itemize} 
         \item Classical analysis: $\eta_t=\frac{1}{\lambda t}$
@@ -115,3 +170,6 @@
     
 \end{frame}
 
+\begin{frame}{SDCA}
+    
+\end{frame}
