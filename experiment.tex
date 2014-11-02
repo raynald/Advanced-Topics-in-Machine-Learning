@@ -83,7 +83,7 @@
     \begin{itemize}
         \item For each t let $\mathbb{\alpha}_{t+1}\in R^n$ be the vector such that $\alpha_{t+1}[j]$ counts how many times example $j$ has been selected so far and we had a non-zero loss on it, namely, $\alpha_{t+1}[j]=\ |{t'\le t:i_{t'}=j\ \wedge\ y_j\langle \wv_{t'},\phi(\xv_j)\rangle < 1}|$.
         \item Represent $\wv_{t+1} = \frac{1}{\lambda t} \sum_{j=1}^{m} \alpha_{t+1}[j]y_j\phi(\xv_j)$
-        \item {\color{green}Cons: overall runtime $\tilde{O}(md/(\lambda \epsilon))$}
+        \item {\color{green}Cons: overall runtime $\tilde{O}(nd/(\lambda \epsilon))$}
     \end{itemize}
 \end{frame}
 
@@ -110,8 +110,8 @@
         \item Pegasos: Simple $\&$ Efficient solver for SVM
         \item Sample vs. computational complexity
             \begin{itemize}
-                \item Sample complexity: How many examples do we need as a function of VC-dim($\lambda$), accuracy($\epsilon$), and confidence($\delta$)
-                \item in Pegasos, we aim at analyzing computational complexity based on $\lambda$, $\epsilon$, $\delta$ (also in Bottou $\&$ Bousquet)
+                \item Sample complexity: how many examples do we need as a function of VC-dim($\lambda$), accuracy($\epsilon$), and confidence($\delta$)
+                \item In Pegasos, the authors aim at analyzing computational complexity based on $\lambda$, $\epsilon$, $\delta$ (also in Bottou $\&$ Bousquet)
             \end{itemize}
         \item Finding argmin vs. calculating min: It seems that Pegasos finds the argmin more easily than it requires to calculate the min value
     \end{itemize}

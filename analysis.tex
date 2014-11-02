@@ -8,7 +8,7 @@
                     \end{itemize}
                 \item Decomposition
                     \begin{itemize}
-                        \item Memory: $n$, time: super-linear in $n$
+                        \item Memory: $n$, time complexity: super-linear in $n$, slow convergence
                     \end{itemize}
             \end{itemize}
         \item Online learning $\&$ Stochastic Gradient
@@ -27,7 +27,7 @@
         \item Choose $\wv_1 = 0 \in \R^d$
         \item Iterate for $t = 1,2,$\ldots$,T$
         \begin{enumerate}
-            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=m}$, uniformly at random
+            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=k}$, uniformly at random
             \item Set stepsize $\eta_t \leftarrow \frac{1}{\lambda t}$
             \item Update $w^{(t+1)} \leftarrow w^{(t)} - \eta_t \partial f_{{\color{red}A_t}}(\wv^{ (t)})$
         \end{enumerate}
@@ -49,9 +49,9 @@
         \item Choose $\wv_1 = 0 \in \R^d$
         \item Iterate for $t = 1,2,$\ldots$,T$
         \begin{enumerate}
-            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=m}$, uniformly at random
+            \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=k}$, uniformly at random
             \item Set stepsize $\eta_t \leftarrow \frac{1}{\lambda t}$
-            \item Update $w^{(t+1)} \leftarrow (1-\eta\lambda)w^{(t)} + \frac{\eta_t}{\color{red}m} \sum_{i\in {\color{red} A_t}} l' \xv_i$
+            \item Update $w^{(t+1)} \leftarrow (1-\eta\lambda)w^{(t)} + \frac{\eta_t}{\color{red}k} \sum_{i\in {\color{red} A_t}} l' \xv_i$
         \end{enumerate}
     \end{enumerate}
 
@@ -124,7 +124,7 @@ Re-arranging and taking expectation again
 \end{frame}
 
 \begin{frame}{Lemma}
-With the Lipschitz assumption on $l(y,u)$ that $\|l'(y,u)\| \le X$, and assuming that $\|\x_i\|\le     R$ $\forall i$ where $i$ is picked according to $p_i$, it holds that
+With the Lipschitz assumption on $l(y,u)$ that $\|l'(y,u)\| \le \ML$, and assuming that $\|\xv_i\|\le     R$ $\forall i$ where $i$ is picked according to $p_i$, it holds that
 \[
     \E_{i^{(t)}} \|\chiv_i^{(t)}\|\le 4\ML^2R^2
 \]
@@ -139,7 +139,7 @@ where $l'(y,u)$ denotes any subgradient with respect to the second variable.
     \]
     \end{block}
     \[
-        \sqrt{\E_{i^{(t)}} \|\chiv_i^{(t)}\|^2} \le \sqrt{\E_{i^{(t)}} \| l'\xv_i \|^2} + \lambda           \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)} \|^2} \le XR + 
+        \sqrt{\E_{i^{(t)}} \|\chiv_i^{(t)}\|^2} \le \sqrt{\E_{i^{(t)}} \| l'\xv_i \|^2} + \lambda           \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)} \|^2} \le \ML R + 
     \] 
     \[
         \lambda \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)}          \|^2}.
@@ -148,7 +148,7 @@ where $l'(y,u)$ denotes any subgradient with respect to the second variable.
         \sqrt{\E_{i(t)} \|\wv^{(t+1)}\|^2} \le (1-\lambda \eta_t) \sqrt{\E_{i(t)} \|\wv^{(t)}\|^2} +        \eta_t \sqrt{\E_{i(t)} \|l'\xv_i\|^2} 
     \]
     \[
-        \le (1-\lambda \eta_t)\sqrt{\E_{i(t)} \| \wv^{(t)}\|^2} +         \lambda \eta_t \frac{XR}{\lambda}.
+        \le (1-\lambda \eta_t)\sqrt{\E_{i(t)} \| \wv^{(t)}\|^2} +         \lambda \eta_t \frac{\ML R}{\lambda}.
     \]
     {\color{blue} Why we don't need projection?}
 \end{frame}
@@ -158,7 +158,7 @@ where $l'(y,u)$ denotes any subgradient with respect to the second variable.
         \item Classical analysis: $\eta_t=\frac{1}{\lambda t}$
             \begin{itemize}
                 \item $\E f\!\left(\frac1T\sum_{t=1}^T \wv^{(t)} \right)- f(\wv^*) \le \frac{2{\ML}^2 R^2}{\lambda T}(\ln{T}+1)$
-                \item For Hinge loss $X = 1$, the result is same as before.
+                \item For Hinge loss $\ML = 1$, the result is same as before.
             \end{itemize}
         \item New analysis: $\eta_t=\frac{2}{\lambda (t+1)}$
             \begin{itemize}
