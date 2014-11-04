@@ -139,7 +139,8 @@ where $l'(y,u)$ denotes any subgradient with respect to the second variable.
     \]
     \end{block}
     \[
-        \chiv_i^{(t)}(\wv^{(t)}) = l'\xv_i + \wv^{(t)}, \wv^{(t+1)} = \wv^{(t)}+l'\xv_i
+        \chiv_i^{(t)}(\wv^{(t)}) = l'\xv_i + \lambda \wv^{(t)}, \wv^{(t+1)} = \wv^{(t)}-\eta_t\chiv_i
+    ^{(t)}    
     \]
     \[
         \sqrt{\E_{i^{(t)}} \|\chiv_i^{(t)}\|^2} \le \sqrt{\E_{i^{(t)}} \| l'\xv_i \|^2} + \lambda           \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)} \|^2} %\le \ML R + 
