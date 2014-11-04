@@ -116,7 +116,7 @@ Taking the expectation on both sides over the recent step
 \]
 Re-arranging and taking expectation over the whole process again
 \[
-    \E f(\wv^{(t)})-f(\wv^*) \le \frac{\eta_t}{2}\E\|\chiv_i^{(t)}\|^2+\frac{1-\lambda     \eta_t}{2\eta_t} \E \|\wv^{(t)}-\wv^*\|^2 
+    \E f(\wv^{(t)})-f(\wv^*) \le \frac{\eta_t}{2}\E_{i^{(t)}}\|\chiv_i^{(t)}\|^2+\frac{1-\lambda     \eta_t}{2\eta_t} \E \|\wv^{(t)}-\wv^*\|^2 
 \]
 \[
     - \frac{1}{2\eta_t}\E\left[  \|\wv^{(t+1)} - \wv^*\|^2  \ |\        \wv^t  \right] 
@@ -139,13 +139,16 @@ where $l'(y,u)$ denotes any subgradient with respect to the second variable.
     \]
     \end{block}
     \[
+        \chiv_i^{(t)}(\wv^{(t)}) = l'\xv_i + \wv^{(t)}, \wv^{(t+1)} = \wv^{(t)}+l'\xv_i
+    \]
+    \[
         \sqrt{\E_{i^{(t)}} \|\chiv_i^{(t)}\|^2} \le \sqrt{\E_{i^{(t)}} \| l'\xv_i \|^2} + \lambda           \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)} \|^2} %\le \ML R + 
     \] 
     %\[
     %    \lambda \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)}          \|^2}.
     %\]
     \[
-        \sqrt{\E_{i(t)} \|\wv^{(t+1)}\|^2} \le (1-\lambda \eta_t) \sqrt{\E_{i(t)} \|\wv^{(t)}\|^2} +        \eta_t \sqrt{\E_{i(t)} \|l'\xv_i\|^2} 
+        \sqrt{\E_{i^{(1:t)}} \|\wv^{(t+1)}\|^2} \le (1-\lambda \eta_t) \sqrt{\E_{i^{(1:t-1)}} \|\wv^{(t)}\|^2} +        \eta_t \sqrt{\E_{i(t)} \|l'\xv_i\|^2} 
     \]
     %\[
     %    \le (1-\lambda \eta_t)\sqrt{\E_{i(t)} \| \wv^{(t)}\|^2} +         \lambda \eta_t \frac{\ML R}{\lambda}.
