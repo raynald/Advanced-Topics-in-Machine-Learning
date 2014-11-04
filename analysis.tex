@@ -174,12 +174,19 @@ where $l'(y,u)$ denotes any subgradient with respect to the second variable.
     \begin{itemize}
         \item Dual problem
             \[
-                max_\theta D(\theta) := \frac1n \sum_{i=1}^n -f_i^*(-\theta_i) - \lambda r^*(\frac{1}{\lambda n}\sum_{i=1}^n \theta_i).
+                \max_{\alphav\in \R^n, 0\le\alphav_i\le 1} D(\alphav):=\frac1n \sum_{i=1}^n \alphav_i-\frac{1}{2\lambda n^2}\sum_{i=1}^n \alphav^T\Qv\alphav.
             \]
-        \item Relationship with primal variable: $\wv=\nabla r^*(\vv(\theta))$, $\vv(\theta)=\frac{1}{\lambda n} \sum_{i=1}^n \theta_i$
+            where 
+            \[
+                 \Qv\in \R^{n\times n}, \Qv_{i,j}=y_iy_j\langle \xv_i, \xv_j\rangle,
+            \]
+        \item Relationship with primal variable: 
+            \[ 
+                 \wv(\alphav) := \frac{1}{\lambda n} \sum_{i=1}^n \alphav_i y_i \xv_i.
+            \]
         \item Traditional SDCA
             \[
-                \theta_i^t = \theta_i^{t-1} + \Delta \theta_i^{t-1}
+                 \alphav_i^{(t+1)} = \alphav_i^{(t)} + \deltav_i^{(t)}e_i,
             \]
     \end{itemize}
 \end{frame}
