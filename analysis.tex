@@ -103,9 +103,9 @@ $\|\wv^{(t+1)}-\wv^*\|^2 = \|\wv^{(t)} - \eta_t\chiv_i^{(t)} - \wv^*\|^2
     = \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\|\chiv_i^{(t)}\|^2 - 2\eta_t\chiv_i^{(t)}(\wv^{(t)} - \wv^*    )$
 
 
-Taking the expectation on both sides 
+Taking the expectation on both sides over the recent step
 \[
-        \E[ \|\wv^{(t+1)}-\wv^*\|^2  \ |\  \wv^t ] 
+    \E_{i^{(t)}}[ \|\wv^{(t+1)}-\wv^*\|^2  \ |\  \wv^t ] 
         = \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\E_{i^{(t)}}\|\chiv_i^{(t)}\|^2 
 \]
 \[
@@ -114,7 +114,7 @@ Taking the expectation on both sides
 \[
     \le \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\E_{i^{(t)}}\|\chiv_i^{(t)}\|^2 - 2\eta_t[f(\wv^{(t)}) -      f(\wv^*) + \frac{\lambda}{2}\|\wv^{(t)}-\wv^*\|^2].
 \]
-Re-arranging and taking expectation again
+Re-arranging and taking expectation over the whole process again
 \[
     \E f(\wv^{(t)})-f(\wv^*) \le \frac{\eta_t}{2}\E\|\chiv_i^{(t)}\|^2+\frac{1-\lambda     \eta_t}{2\eta_t} \E \|\wv^{(t)}-\wv^*\|^2 
 \]

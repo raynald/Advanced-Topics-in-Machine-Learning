@@ -17,7 +17,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Linear kernels}
+\begin{frame}{Dataset characteristics}
 \begin{table}[ht]
     \centering
     \begin{tabular}{l|l|l|l|l|l}
@@ -30,7 +30,7 @@
     \end{table}
 \end{frame}
 
-\begin{frame}{Linear kernels}
+\begin{frame}{Training runtime and test error}
 \begin{table}[ht]
     \centering
     \begin{tabular}{lllll}
@@ -105,15 +105,18 @@
 \end{frame}
 \end{comment}
 
-\begin{frame}{Discussion}
+\begin{frame}{Summary}
     \begin{itemize}
         \item Pegasos: Simple $\&$ Efficient solver for SVM
-        \item Sample vs. computational complexity
+        \item Faster convergence rate
             \begin{itemize}
-                \item Sample complexity: how many examples do we need as a function of VC-dim($\lambda$), accuracy($\epsilon$), and confidence($\delta$)
-                \item In Pegasos, the authors aim at analyzing computational complexity based on $\lambda$, $\epsilon$, $\delta$ (also in Bottou $\&$ Bousquet)
+                \item Choose of different step size
             \end{itemize}
-        \item Finding argmin vs. calculating min: It seems that Pegasos finds the argmin more easily than it requires to calculate the min value
+        \item Extension
+            \begin{itemize}
+                \item Bound on $\nabla f$ is enough
+                \item Non-uniform sampling
+            \end{itemize}
     \end{itemize}
 \end{frame}
 
