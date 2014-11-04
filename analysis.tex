@@ -99,16 +99,16 @@
 
 \section{Analysis - faster convergence rates}
 \begin{frame}{How to achieve this?}
-$\|\wv^{(t+1)}-\wv^*\|^2 = \|\wv^{(t)} - \eta_t\chiv_i^{(t)} - \wv^*\|^2
-    = \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\|\chiv_i^{(t)}\|^2 - 2\eta_t\chiv_i^{(t)}(\wv^{(t)} - \wv^*    )$
+$\|\wv^{(t+1)}-\wv^*\|^2 = \|\wv^{(t)} - \eta_t\chiv_i^{(t)} - \wv^*\|^2$
+$= \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\|\chiv_i^{(t)}\|^2 - 2\eta_t\chiv_i^{(t)}(\wv^{(t)} - \wv^*    )$
 
 
 Taking the expectation on both sides over the recent step
 \[
     \E_{i^{(t)}}[ \|\wv^{(t+1)}-\wv^*\|^2  \ |\  \wv^t ] 
-        = \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\E_{i^{(t)}}\|\chiv_i^{(t)}\|^2 
 \]
 \[
+        = \|\wv^{(t)} - \wv^*\|^2 + \eta_t^2\E_{i^{(t)}}\|\chiv_i^{(t)}\|^2 
     - 2\eta_t\chiv_i^{(t)}(\wv^{(t)} - \wv^*)
 \]
 \[
@@ -132,24 +132,24 @@ where $l'(y,u)$ denotes any subgradient with respect to the second variable.
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{How to prove it?}
     \begin{block}{ Minkowski inequality}
     \[
         \sqrt{\E(X+Y)^2} \le \sqrt{\E X^2} + \sqrt{\E Y^2}
     \]
     \end{block}
     \[
-        \sqrt{\E_{i^{(t)}} \|\chiv_i^{(t)}\|^2} \le \sqrt{\E_{i^{(t)}} \| l'\xv_i \|^2} + \lambda           \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)} \|^2} \le \ML R + 
+        \sqrt{\E_{i^{(t)}} \|\chiv_i^{(t)}\|^2} \le \sqrt{\E_{i^{(t)}} \| l'\xv_i \|^2} + \lambda           \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)} \|^2} %\le \ML R + 
     \] 
-    \[
-        \lambda \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)}          \|^2}.
-    \]
+    %\[
+    %    \lambda \sqrt{\E_{i^{(1:t-1)}} \| \wv^{(t)}          \|^2}.
+    %\]
     \[
         \sqrt{\E_{i(t)} \|\wv^{(t+1)}\|^2} \le (1-\lambda \eta_t) \sqrt{\E_{i(t)} \|\wv^{(t)}\|^2} +        \eta_t \sqrt{\E_{i(t)} \|l'\xv_i\|^2} 
     \]
-    \[
-        \le (1-\lambda \eta_t)\sqrt{\E_{i(t)} \| \wv^{(t)}\|^2} +         \lambda \eta_t \frac{\ML R}{\lambda}.
-    \]
+    %\[
+    %    \le (1-\lambda \eta_t)\sqrt{\E_{i(t)} \| \wv^{(t)}\|^2} +         \lambda \eta_t \frac{\ML R}{\lambda}.
+    %\]
     {\color{blue} Why we don't need projection?}
 \end{frame}
 
