@@ -51,7 +51,7 @@
         \begin{enumerate}
             \item Choose {\color{red} $A_t$} $\subset S = \{1,2,\ldots,n\},{\color{red}|A_t|=k}$, uniformly at random
             \item Set stepsize $\eta_t \leftarrow \frac{1}{\lambda t}$
-            \item Update $w^{(t+1)} \leftarrow (1-\eta\lambda)w^{(t)} + \frac{\eta_t}{\color{red}k} \sum_{i\in {\color{red} A_t}} l' \xv_i$
+            \item Update $w^{(t+1)} \leftarrow (1-\eta_t\lambda)w^{(t)} + \frac{\eta_t}{\color{red}k} \sum_{i\in {\color{red} A_t}} l' \xv_i$
         \end{enumerate}
     \end{enumerate}
 
